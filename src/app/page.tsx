@@ -1,25 +1,30 @@
-import ExperienceGrid from "@/components/experience/experience-grid";
 import Button from "@/components/ui/button";
-import { experiences } from "@/data/experiences";
 
 export default function Home() {
   return (
-    <section className="space-y-8">
-      <header className="space-y-4">
-        <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Discover your next trip</p>
-        <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-zinc-900">
-          Curated travel experiences for curious explorers.
-        </h1>
-        <p className="max-w-2xl text-zinc-600">
-          Explore hand-picked activities across culture, nature, wellness, food, and adventure.
-        </p>
-        <Button href="/experiences">View all experiences</Button>
-      </header>
+    <section className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 shadow-sm sm:p-10">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-primary/15 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-secondary/15 blur-3xl"
+      />
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">Featured experiences</h2>
-        <ExperienceGrid items={experiences.slice(0, 6)} />
-      </section>
+      <header className="relative z-10 mx-auto flex max-w-3xl flex-col items-start gap-5">
+        <p className="rounded-full bg-background px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted">
+          Wanderlust Explorer
+        </p>
+        <h1 className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+          Descubre experiencias de viaje que no vas a olvidar.
+        </h1>
+        <p className="max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+          Encuentra actividades seleccionadas en cultura, naturaleza, aventura y bienestar para planear tu
+          proxima escapada de forma simple y visual.
+        </p>
+        <Button href="/experiences">Explorar experiencias</Button>
+      </header>
     </section>
   );
 }

@@ -1,17 +1,17 @@
-import ExperienceGrid from "@/components/experience/experience-grid";
-import SearchBar from "@/components/filters/search-bar";
-import { experiences } from "@/data/experiences";
+import { Suspense } from "react";
+import ExperienceFilters from "@/components/filters/experience-filters";
 
 export default function ExperiencesPage() {
   return (
-    <section className="space-y-6">
+    <section className="space-y-6 rounded-3xl bg-background p-4 sm:p-6">
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Experiences</h1>
-        <p className="text-zinc-600">Browse curated activities for your next trip.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Explorador de experiencias</h1>
+        <p className="text-sm text-muted sm:text-base">Descubre 100 planes memorables para tu proximo viaje.</p>
       </header>
 
-      <SearchBar />
-      <ExperienceGrid items={experiences.slice(0, 9)} />
+      <Suspense fallback={<p className="text-sm text-muted">Cargando filtros...</p>}>
+        <ExperienceFilters />
+      </Suspense>
     </section>
   );
 }
