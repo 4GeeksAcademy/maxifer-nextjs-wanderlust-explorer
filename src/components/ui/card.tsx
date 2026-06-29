@@ -8,7 +8,7 @@ interface CardProps {
 
 export default function Card({ children, className }: CardProps) {
   return (
-    <article className={cn("rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm", className)}>
+    <article className={cn("rounded-2xl border border-border bg-surface p-5 shadow-card", className)}>
       {children}
     </article>
   );

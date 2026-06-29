@@ -35,10 +35,12 @@ export default function ExperienceFilters() {
   };
 
   return (
-    <div className="space-y-4">
-      <FilterBar filters={filters} onFilterChange={updateParam} />
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-border bg-surface-low p-4 sm:p-5">
+        <FilterBar filters={filters} onFilterChange={updateParam} />
+      </div>
 
-      <p className="text-sm font-medium text-muted">
+      <p className="text-sm font-semibold text-muted">
         {filteredExperiences.length} resultado{filteredExperiences.length === 1 ? "" : "s"} encontrado
         {filteredExperiences.length === 1 ? "" : "s"}
       </p>

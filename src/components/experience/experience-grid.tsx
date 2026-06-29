@@ -10,8 +10,8 @@ interface ExperienceGridProps {
 export default function ExperienceGrid({ items, favoriteIds, onToggleFavorite }: ExperienceGridProps) {
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center">
-        <h2 className="text-xl font-semibold text-foreground">No se encontraron resultados</h2>
+      <div className="rounded-2xl border border-dashed border-border-strong bg-surface p-8 text-center shadow-card">
+        <h2 className="font-heading text-xl font-semibold text-foreground">No se encontraron resultados</h2>
         <p className="mt-2 text-sm leading-6 text-muted">
           Prueba ajustar la busqueda, cambiar la categoria o borrar el destino para ver mas experiencias.
         </p>
@@ -20,7 +20,7 @@ export default function ExperienceGrid({ items, favoriteIds, onToggleFavorite }:
   }
 
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {items.map((experience) => (
         <ExperienceCard
           key={experience.id}

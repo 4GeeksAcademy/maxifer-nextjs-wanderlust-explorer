@@ -34,12 +34,12 @@ export default function FilterBar({ filters, onFilterChange }: FilterBarProps) {
       <SearchBar value={filters.search} onChange={(value) => handleChange("search", value)} />
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <label className="space-y-1">
-          <span className="text-sm font-medium text-foreground">Categoria</span>
+        <label className="space-y-2">
+          <span className="text-sm font-semibold text-foreground">Categoria</span>
           <select
             value={filters.category}
             onChange={(event) => handleChange("category", event.target.value)}
-            className="w-full rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-700 outline-none"
+            className="h-12 w-full rounded-lg border border-border bg-surface px-4 text-sm text-foreground shadow-card outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
           >
             <option value="">Todas</option>
             {CATEGORIES.map((item) => (
@@ -50,14 +50,14 @@ export default function FilterBar({ filters, onFilterChange }: FilterBarProps) {
           </select>
         </label>
 
-        <label className="space-y-1">
-          <span className="text-sm font-medium text-foreground">Destino (ciudad o pais)</span>
+        <label className="space-y-2">
+          <span className="text-sm font-semibold text-foreground">Destino (ciudad o pais)</span>
           <input
             type="search"
             value={filters.destination}
             onChange={(event) => handleChange("destination", event.target.value)}
             placeholder="Ej: Medellin o Colombia"
-            className="w-full rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-700 outline-none placeholder:text-zinc-400"
+            className="h-12 w-full rounded-lg border border-border bg-surface px-4 text-sm text-foreground shadow-card outline-none transition placeholder:text-muted/60 focus:border-primary focus:ring-2 focus:ring-primary/15"
           />
         </label>
       </div>

@@ -1,31 +1,65 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f7;
+  --background: #fcf9f8;
   --surface: #ffffff;
-  --foreground: #222222;
-  --primary: #ff385c;
-  --secondary: #00a699;
-  --secondary-soft: #e7f7f5;
-  --muted: #717171;
-  --border: #dddddd;
+  --surface-low: #f6f3f2;
+  --surface-container: #f0edec;
+  --surface-high: #ebe7e7;
+  --foreground: #1c1b1b;
+  --muted: #5b4038;
+  --primary: #ae3200;
+  --primary-hover: #852400;
+  --primary-soft: #ffdbd0;
+  --secondary: #406182;
+  --secondary-soft: #cfe5ff;
+  --tertiary: #006494;
+  --border: #e4beb3;
+  --border-strong: #8f7067;
+  --inverse: #313030;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-low: var(--surface-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-high: var(--surface-high);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
   --color-secondary: var(--secondary);
   --color-secondary-soft: var(--secondary-soft);
+  --color-tertiary: var(--tertiary);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-border-strong: var(--border-strong);
+  --color-inverse: var(--inverse);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-plus-jakarta);
+  --shadow-card: 0 2px 8px rgb(28 27 27 / 0.04);
+  --shadow-card-hover: 0 12px 24px rgb(28 27 27 / 0.08);
+  --shadow-panel: 0 16px 48px rgb(28 27 27 / 0.08);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--foreground);
 }

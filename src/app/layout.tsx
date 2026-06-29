@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { FavoritesProvider } from "@/components/providers/favorites-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
 });
 
@@ -29,13 +29,15 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
         <FavoritesProvider>
-          <div className="flex min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col pb-24 md:pb-0">
             <Navbar />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">{children}</main>
+            <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+              {children}
+            </main>
             <Footer />
           </div>
         </FavoritesProvider>
