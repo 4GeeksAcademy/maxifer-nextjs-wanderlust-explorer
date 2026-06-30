@@ -1,53 +1,64 @@
 import Image from "next/image";
-import Button from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="space-y-10">
-      <section className="grid min-h-[calc(100svh-160px)] overflow-hidden rounded-2xl border border-border bg-surface shadow-panel lg:grid-cols-[1fr_0.92fr]">
-        <div className="flex items-center px-6 py-12 sm:px-10 lg:px-12">
-          <header className="max-w-2xl space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Wanderlust Explorer</p>
-            <div className="space-y-4">
-              <h1 className="font-heading text-4xl font-bold leading-tight text-foreground sm:text-5xl lg:text-6xl">
-                Descubre experiencias de viaje que no vas a olvidar.
-              </h1>
-              <p className="max-w-xl text-base leading-7 text-muted sm:text-lg">
-                Encuentra actividades seleccionadas en cultura, naturaleza, aventura y bienestar para planear tu
-                proxima escapada de forma simple y visual.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button href="/experiences">Explorar experiencias</Button>
-              <Button href="/favorites" variant="secondary">Ver favoritos</Button>
-            </div>
-          </header>
-        </div>
-
-        <div className="relative min-h-[360px] lg:min-h-full">
+    <section className="mx-auto flex min-h-[calc(100svh-180px)] max-w-5xl items-start justify-center py-4 sm:items-center sm:py-8">
+      <div className="relative w-full max-w-136 pb-14 sm:max-w-4xl sm:pb-16">
+        <div className="relative min-h-100 overflow-hidden rounded-[1.4rem] shadow-panel sm:min-h-124 lg:min-h-136">
           <Image
-            src="https://picsum.photos/seed/wanderlust-hero/1200/1400"
-            alt="Paisaje de viaje con montanas y ruta escenica"
+            src="https://picsum.photos/id/1018/1200/900"
+            alt="Paisaje de montanas al atardecer para inspirar un viaje"
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 640px) 100vw, 896px"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-foreground/45 via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-5 rounded-full bg-surface/90 px-4 py-2 text-sm font-semibold text-foreground backdrop-blur">
-            100 experiencias curadas
-          </div>
+          <div className="absolute inset-0 bg-linear-to-t from-foreground/70 via-foreground/20 to-transparent" />
+          <HeroTitle />
         </div>
-      </section>
+        <HeroCta />
+      </div>
+    </section>
+  );
+}
 
-      <section className="grid gap-4 sm:grid-cols-3">
-        {["Aventura", "Cultura", "Bienestar"].map((item) => (
-          <div key={item} className="rounded-2xl border border-border bg-surface-low p-5">
-            <p className="text-sm font-semibold text-primary">{item}</p>
-            <p className="mt-2 text-sm leading-6 text-muted">Rutas claras, detalles utiles y descubrimiento sin friccion.</p>
-          </div>
-        ))}
-      </section>
-    </div>
+function HeroTitle() {
+  return (
+    <header className="absolute inset-x-0 bottom-20 px-7 text-white sm:bottom-24 sm:px-10 lg:px-12">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/85">
+        Wanderlust Explorer
+      </p>
+      <h1 className="max-w-2xl font-heading text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+        Descubre tu próxima aventura
+      </h1>
+    </header>
+  );
+}
+
+function HeroCta() {
+  return (
+    <Link
+      href="/experiences"
+      className="absolute inset-x-3 bottom-0 flex min-h-22 items-center justify-between rounded-full bg-surface px-8 text-base font-semibold text-foreground shadow-panel transition hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inset-x-6 sm:min-h-24 sm:px-10 sm:text-2xl"
+      aria-label="Explorar experiencias"
+    >
+      <span>Explorar experiencias</span>
+      <span className="ml-4 flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-white sm:size-16">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="size-7"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2.5"
+        >
+          <circle cx="11" cy="11" r="6" />
+          <path d="m16 16 4 4" />
+        </svg>
+      </span>
+    </Link>
   );
 }

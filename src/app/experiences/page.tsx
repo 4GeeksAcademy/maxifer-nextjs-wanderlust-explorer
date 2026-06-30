@@ -9,9 +9,6 @@ export default function ExperiencesPage() {
         <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Explorador de experiencias
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-          Descubre 100 planes memorables para tu proximo viaje.
-        </p>
       </header>
 
       <Suspense fallback={<p className="text-sm text-muted">Cargando filtros...</p>}>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { FavoritesProvider } from "@/components/providers/favorites-provider";
 import "./globals.css";
@@ -35,10 +34,9 @@ export default function RootLayout({
         <FavoritesProvider>
           <div className="flex min-h-screen flex-col pb-24 md:pb-0">
             <Navbar />
-            <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+            <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
               {children}
             </main>
-            <Footer />
           </div>
         </FavoritesProvider>
       </body>
