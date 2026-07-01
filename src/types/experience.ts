@@ -1,9 +1,9 @@
 export type ExperienceCategory =
-  | "Adventure"
-  | "Culture"
-  | "Food"
-  | "Wellness"
-  | "Nature";
+  | "Aventura"
+  | "Cultura"
+  | "Gastronomia"
+  | "Bienestar"
+  | "Naturaleza";
 
 export interface Experience {
   id: number;

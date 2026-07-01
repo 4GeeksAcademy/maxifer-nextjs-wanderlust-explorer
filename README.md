@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wanderlust Explorer
 
-## Getting Started
+Aplicacion web de exploracion de experiencias de viaje construida con Next.js, React y TypeScript.
 
-First, run the development server:
+El proyecto permite:
+
+- Buscar experiencias por titulo.
+- Filtrar por categoria y destino usando query params en la URL.
+- Ver detalle de cada experiencia.
+- Marcar y desmarcar favoritos.
+- Consultar una vista de perfil de usuario simulado.
+
+## Objetivo
+
+Construir un MVP multipagina con enfoque mobile-first para una startup travel-tech ficticia, priorizando:
+
+- UI moderna y clara.
+- Componentes reutilizables.
+- Estructura escalable por responsabilidad.
+
+## Stack
+
+- Next.js 16.2.9
+- React 19.2.4
+- TypeScript 5
+- Tailwind CSS 4
+- lucide-react (iconografia)
+
+## Vistas principales
+
+- `/`: Home con hero y CTA hacia experiencias.
+- `/experiences`: Explorador con buscador, filtros y grid de cards.
+- `/experiences/[id]`: Detalle de experiencia con informacion ampliada y accion de favorito.
+- `/favorites`: Lista de experiencias guardadas y estado vacio.
+- `/profile`: Perfil estatico con metricas y secciones de cuenta/soporte.
+
+## Funcionalidades clave
+
+- Filtros en URL:
+	- `search`
+	- `category`
+	- `destination`
+- Filtrado combinado y reactivo sin recarga de pagina.
+- Busqueda por regex case-insensitive (con escape seguro cuando aplica).
+- Estado global de favoritos mediante provider con React context.
+- Datos locales de experiencias (sin backend).
+
+Ejemplo de URL con filtros:
+
+```txt
+/experiences?search=vela&category=Adventure&destination=Split%2C%20Croatia
+```
+
+## Estructura del proyecto
+
+```txt
+src/
+	app/
+		experiences/
+		favorites/
+		profile/
+	components/
+		experience/
+		filters/
+		layout/
+		providers/
+		ui/
+	data/
+	hooks/
+	lib/
+	types/
+```
+
+## Instalacion y ejecucion
+
+1. Instalar dependencias:
+
+```bash
+npm install
+```
+
+2. Levantar entorno de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Abrir en navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```txt
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts disponibles
 
-## Learn More
+- `npm run dev`: inicia servidor de desarrollo.
+- `npm run build`: genera build de produccion.
+- `npm run start`: sirve el build de produccion.
+- `npm run lint`: ejecuta ESLint.
 
-To learn more about Next.js, take a look at the following resources:
+## Estado actual
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Favoritos en memoria (sin persistencia en localStorage o backend).
+- Dataset local para prototipo.
+- Flujo completo de exploracion y detalle implementado.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design References
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Airbnb Experiences](https://www.airbnb.com/experiences) -> inspiracion general.
+- [GetYourGuide](https://www.getyourguide.com/) -> cards.
+- [TripAdvisor](https://www.tripadvisor.com/) -> presentacion de informacion.

@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 import type { ExperienceCategory } from "@/types/experience";
 
 const CATEGORY_OPTIONS: Array<{ value: ExperienceCategory; icon: LucideIcon }> = [
-  { value: "Food", icon: Utensils },
-  { value: "Adventure", icon: PersonStanding },
-  { value: "Culture", icon: Landmark },
-  { value: "Wellness", icon: Flower2 },
-  { value: "Nature", icon: Trees },
+  { value: "Gastronomia", icon: Utensils },
+  { value: "Aventura", icon: PersonStanding },
+  { value: "Cultura", icon: Landmark },
+  { value: "Bienestar", icon: Flower2 },
+  { value: "Naturaleza", icon: Trees },
 ];
 
 interface CategoryButtonGroupProps {
@@ -46,7 +46,7 @@ export default function CategoryButtonGroup({ value, onChange }: CategoryButtonG
                     : "border-transparent bg-surface text-primary group-hover:border-primary/40 group-hover:bg-primary/5",
                 )}
               >
-                <Icon className="h-8 w-8" aria-hidden="true" />
+                <Icon className="h-8 w-8" aria-hidden={true} />
               </span>
               <span
                 className={cn(

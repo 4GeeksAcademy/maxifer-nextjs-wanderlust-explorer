@@ -15,7 +15,7 @@ export default function SearchBar({
     <div className="relative w-full rounded-full border border-border bg-surface px-4 py-3 shadow-card transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/15">
       <Search
         className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted/70"
-        aria-hidden="true"
+        aria-hidden={true}
       />
       <input
         type="search"

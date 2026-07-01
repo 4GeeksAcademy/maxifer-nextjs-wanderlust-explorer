@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { Compass, Heart, Home, Search, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -13,72 +14,59 @@ const links = [
 ];
 
 function NavIcon({ name }: { name: string }) {
-  const iconProps = {
-    className: "h-5 w-5",
-    fill: "none",
-    stroke: "currentColor",
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    strokeWidth: 2,
-    viewBox: "0 0 24 24",
-  };
+  const iconProps = { className: "h-5 w-5", "aria-hidden": true };
 
   if (name === "search") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="m21 21-4.3-4.3" />
-        <circle cx="11" cy="11" r="7" />
-      </svg>
-    );
+    return <Search {...iconProps} />;
   }
 
   if (name === "heart") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="M19.5 12.6 12 20l-7.5-7.4a5 5 0 0 1 7.1-7.1l.4.4.4-.4a5 5 0 1 1 7.1 7.1Z" />
-      </svg>
-    );
+    return <Heart {...iconProps} />;
   }
 
   if (name === "user") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <circle cx="12" cy="8" r="3.5" />
-        <path d="M5 20a7 7 0 0 1 14 0" />
-      </svg>
-    );
+    return <User {...iconProps} />;
   }
 
   if (name === "home") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10" />
-        <path d="M10 20v-6h4v6" />
-      </svg>
-    );
+    return <Home {...iconProps} />;
   }
 
-  return (
-    <svg aria-hidden="true" {...iconProps}>
-      <path d="m15 9-2 6-4 2 2-6 4-2Z" />
-      <path d="M12 2v2" />
-      <path d="M12 20v2" />
-      <path d="M2 12h2" />
-      <path d="M20 12h2" />
-    </svg>
-  );
+  return <Compass {...iconProps} />;
 }
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileHeaderVisible, setIsMobileHeaderVisible] = useState(true);
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState(true);
   const lastScrollY = useRef(0);
   const isExperiencesRoute = pathname === "/experiences" || pathname.startsWith("/experiences/");
+  const isFavoritesRoute = pathname === "/favorites" || pathname.startsWith("/favorites/");
+  const isProfileRoute = pathname === "/profile" || pathname.startsWith("/profile/");
+  const shouldAutoHideBottomNav = isExperiencesRoute || isFavoritesRoute || isProfileRoute;
+  const isExperienceDetailRoute = pathname.startsWith("/experiences/");
 
   useEffect(() => {
+    if (isExperienceDetailRoute) {
+      return;
+    }
+
+    lastScrollY.current = window.scrollY;
+
     const handleScroll = () => {
       const currentY = window.scrollY;
+
+      if (shouldAutoHideBottomNav) {
+        if (currentY <= 8) {
+          setIsBottomNavVisible(true);
+        } else if (currentY > lastScrollY.current + 4) {
+          setIsBottomNavVisible(false);
+        } else if (currentY < lastScrollY.current - 4) {
+          setIsBottomNavVisible(true);
+        }
+      } else {
+        setIsBottomNavVisible(true);
+      }
 
       if (isExperiencesRoute) {
         setIsMobileHeaderVisible(currentY <= 8);
@@ -108,7 +96,11 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isExperiencesRoute]);
+  }, [isExperienceDetailRoute, isExperiencesRoute, shouldAutoHideBottomNav]);
+
+  if (isExperienceDetailRoute) {
+    return null;
+  }
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -122,40 +114,35 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+0.5rem)] transition-transform duration-300 md:hidden",
+          "fixed inset-x-0 top-0 z-50 pt-[calc(env(safe-area-inset-top)+0.5rem)] transition-transform duration-300 md:hidden",
           isMobileHeaderVisible ? "translate-y-0" : "-translate-y-full",
         )}
       >
-        <div className="mx-auto flex h-13 max-w-7xl items-center justify-between rounded-2xl border border-border bg-surface/95 px-4 shadow-card backdrop-blur">
-          <Link href="/" className="flex items-center gap-2 text-foreground">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 bg-primary-soft font-heading text-sm font-bold text-primary">
+        <div className="flex h-13 w-full items-center border border-border bg-surface/95 px-4 shadow-card backdrop-blur">
+          <Link href="/" className="flex items-center gap-3 text-foreground">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-heading text-base font-bold text-white">
               W
             </span>
-            <span className="font-heading text-[1rem] font-semibold tracking-tight">Wanderlust Explorer</span>
-          </Link>
-          <Link
-            href="/profile"
-            aria-label="Ir al perfil"
-            className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-low text-muted transition hover:border-primary/40 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-              isActiveLink("/profile") && "border-primary/50 bg-primary-soft text-primary",
-            )}
-          >
-            <NavIcon name="user" />
+            <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
           </Link>
         </div>
       </header>
 
-      <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
+      <header
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] pt-1 transition-transform duration-300 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur md:translate-y-0",
+          isBottomNavVisible ? "translate-y-0" : "translate-y-full",
+        )}
+      >
         <div className="mx-auto flex w-full max-w-7xl items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
           <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-heading text-base font-bold text-white">
               W
             </span>
             <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
           </Link>
           <nav
-            aria-label="Navegacion principal"
+            aria-label="Navegación principal"
             className="grid w-full grid-cols-4 gap-1 rounded-2xl text-xs font-semibold text-muted md:flex md:w-auto md:items-center md:gap-2 md:text-sm"
           >
             {links.map((link) => {
@@ -167,13 +154,20 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-center transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
+                    "flex min-h-12 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-1 text-center transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
                     "hover:bg-surface-low hover:text-foreground",
-                    isActive && "bg-primary text-white shadow-card hover:bg-primary-hover hover:text-white",
+                    isActive && "md:bg-primary md:text-white md:shadow-card md:hover:bg-primary-hover md:hover:text-white",
                   )}
                 >
-                  <NavIcon name={link.icon} />
-                  <span className="truncate">{link.label}</span>
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center rounded-full transition",
+                      isActive && "bg-primary text-white shadow-card md:bg-transparent md:text-current md:shadow-none",
+                    )}
+                  >
+                    <NavIcon name={link.icon} />
+                  </span>
+                  <span className="hidden truncate md:inline">{link.label}</span>
                 </Link>
               );
             })}
