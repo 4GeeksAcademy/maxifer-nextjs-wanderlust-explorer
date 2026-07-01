@@ -48,7 +48,7 @@ Construir un MVP multipagina con enfoque mobile-first para una startup travel-te
 Ejemplo de URL con filtros:
 
 ```txt
-/experiences?search=vela&category=Adventure&destination=Split%2C%20Croatia
+/experiences?search=vela&category=Aventura&destination=Split%2C%20Croatia
 ```
 
 ## Estructura del proyecto
