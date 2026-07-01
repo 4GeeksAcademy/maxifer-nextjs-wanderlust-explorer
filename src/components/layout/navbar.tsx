@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { Compass, Heart, Home, Search, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -13,61 +14,25 @@ const links = [
 ];
 
 function NavIcon({ name }: { name: string }) {
-  const iconProps = {
-    className: "h-5 w-5",
-    fill: "none",
-    stroke: "currentColor",
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    strokeWidth: 2,
-    viewBox: "0 0 24 24",
-  };
+  const iconProps = { className: "h-5 w-5", "aria-hidden": true };
 
   if (name === "search") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="m21 21-4.3-4.3" />
-        <circle cx="11" cy="11" r="7" />
-      </svg>
-    );
+    return <Search {...iconProps} />;
   }
 
   if (name === "heart") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="M19.5 12.6 12 20l-7.5-7.4a5 5 0 0 1 7.1-7.1l.4.4.4-.4a5 5 0 1 1 7.1 7.1Z" />
-      </svg>
-    );
+    return <Heart {...iconProps} />;
   }
 
   if (name === "user") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <circle cx="12" cy="8" r="3.5" />
-        <path d="M5 20a7 7 0 0 1 14 0" />
-      </svg>
-    );
+    return <User {...iconProps} />;
   }
 
   if (name === "home") {
-    return (
-      <svg aria-hidden="true" {...iconProps}>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10" />
-        <path d="M10 20v-6h4v6" />
-      </svg>
-    );
+    return <Home {...iconProps} />;
   }
 
-  return (
-    <svg aria-hidden="true" {...iconProps}>
-      <path d="m15 9-2 6-4 2 2-6 4-2Z" />
-      <path d="M12 2v2" />
-      <path d="M12 20v2" />
-      <path d="M2 12h2" />
-      <path d="M20 12h2" />
-    </svg>
-  );
+  return <Compass {...iconProps} />;
 }
 
 export default function Navbar() {
@@ -75,8 +40,13 @@ export default function Navbar() {
   const [isMobileHeaderVisible, setIsMobileHeaderVisible] = useState(true);
   const lastScrollY = useRef(0);
   const isExperiencesRoute = pathname === "/experiences" || pathname.startsWith("/experiences/");
+  const isExperienceDetailRoute = pathname.startsWith("/experiences/");
 
   useEffect(() => {
+    if (isExperienceDetailRoute) {
+      return;
+    }
+
     const handleScroll = () => {
       const currentY = window.scrollY;
 
@@ -108,7 +78,11 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isExperiencesRoute]);
+  }, [isExperienceDetailRoute, isExperiencesRoute]);
+
+  if (isExperienceDetailRoute) {
+    return null;
+  }
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -146,7 +120,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
+      <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] pt-1 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
         <div className="mx-auto flex w-full max-w-7xl items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
           <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
@@ -167,13 +141,20 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-center transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
+                    "flex min-h-12 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-1 text-center transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
                     "hover:bg-surface-low hover:text-foreground",
-                    isActive && "bg-primary text-white shadow-card hover:bg-primary-hover hover:text-white",
+                    isActive && "md:bg-primary md:text-white md:shadow-card md:hover:bg-primary-hover md:hover:text-white",
                   )}
                 >
-                  <NavIcon name={link.icon} />
-                  <span className="truncate">{link.label}</span>
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center rounded-full transition",
+                      isActive && "bg-primary text-white shadow-card md:bg-transparent md:text-current md:shadow-none",
+                    )}
+                  >
+                    <NavIcon name={link.icon} />
+                  </span>
+                  <span className="hidden truncate md:inline">{link.label}</span>
                 </Link>
               );
             })}

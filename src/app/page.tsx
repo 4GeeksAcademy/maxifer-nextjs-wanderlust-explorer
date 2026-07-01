@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Search } from "lucide-react";
 
 export default function Home() {
   return (
@@ -45,19 +46,7 @@ function HeroCta() {
     >
       <span>Explorar experiencias</span>
       <span className="ml-4 flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-white sm:size-16">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="size-7"
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2.5"
-        >
-          <circle cx="11" cy="11" r="6" />
-          <path d="m16 16 4 4" />
-        </svg>
+        <Search aria-hidden="true" className="size-7" strokeWidth={2.5} />
       </span>
     </Link>
   );
