@@ -16,7 +16,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Wanderlust Explorer",
-  description: "Travel experiences curated for explorers.",
+  description: "Experiencias de viaje seleccionadas para personas exploradoras.",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       suppressHydrationWarning
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >

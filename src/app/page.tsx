@@ -9,7 +9,7 @@ export default function Home() {
         <div className="relative min-h-100 overflow-hidden rounded-[1.4rem] shadow-panel sm:min-h-124 lg:min-h-136">
           <Image
             src="https://picsum.photos/id/1018/1200/900"
-            alt="Paisaje de montanas al atardecer para inspirar un viaje"
+            alt="Paisaje de montañas al atardecer para inspirar un viaje"
             fill
             priority
             sizes="(max-width: 640px) 100vw, 896px"
@@ -41,7 +41,7 @@ function HeroCta() {
   return (
     <Link
       href="/experiences"
-      className="absolute inset-x-3 bottom-0 flex min-h-22 items-center justify-between rounded-full bg-surface px-8 text-base font-semibold text-foreground shadow-panel transition hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inset-x-6 sm:min-h-24 sm:px-10 sm:text-2xl"
+      className="absolute inset-x-3 bottom-0 flex min-h-22 items-center justify-between rounded-full bg-surface px-8 text-base font-semibold text-foreground shadow-panel transition hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:inset-x-6 sm:min-h-24 sm:px-10 sm:text-2xl"
       aria-label="Explorar experiencias"
     >
       <span>Explorar experiencias</span>

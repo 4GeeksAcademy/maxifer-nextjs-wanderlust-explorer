@@ -38,8 +38,12 @@ function NavIcon({ name }: { name: string }) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileHeaderVisible, setIsMobileHeaderVisible] = useState(true);
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState(true);
   const lastScrollY = useRef(0);
   const isExperiencesRoute = pathname === "/experiences" || pathname.startsWith("/experiences/");
+  const isFavoritesRoute = pathname === "/favorites" || pathname.startsWith("/favorites/");
+  const isProfileRoute = pathname === "/profile" || pathname.startsWith("/profile/");
+  const shouldAutoHideBottomNav = isExperiencesRoute || isFavoritesRoute || isProfileRoute;
   const isExperienceDetailRoute = pathname.startsWith("/experiences/");
 
   useEffect(() => {
@@ -47,8 +51,22 @@ export default function Navbar() {
       return;
     }
 
+    lastScrollY.current = window.scrollY;
+
     const handleScroll = () => {
       const currentY = window.scrollY;
+
+      if (shouldAutoHideBottomNav) {
+        if (currentY <= 8) {
+          setIsBottomNavVisible(true);
+        } else if (currentY > lastScrollY.current + 4) {
+          setIsBottomNavVisible(false);
+        } else if (currentY < lastScrollY.current - 4) {
+          setIsBottomNavVisible(true);
+        }
+      } else {
+        setIsBottomNavVisible(true);
+      }
 
       if (isExperiencesRoute) {
         setIsMobileHeaderVisible(currentY <= 8);
@@ -78,7 +96,7 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isExperienceDetailRoute, isExperiencesRoute]);
+  }, [isExperienceDetailRoute, isExperiencesRoute, shouldAutoHideBottomNav]);
 
   if (isExperienceDetailRoute) {
     return null;
@@ -120,7 +138,12 @@ export default function Navbar() {
         </div>
       </header>
 
-      <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] pt-1 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
+      <header
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] pt-1 transition-transform duration-300 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur md:translate-y-0",
+          isBottomNavVisible ? "translate-y-0" : "translate-y-full",
+        )}
+      >
         <div className="mx-auto flex w-full max-w-7xl items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
           <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
@@ -129,7 +152,7 @@ export default function Navbar() {
             <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
           </Link>
           <nav
-            aria-label="Navegacion principal"
+            aria-label="Navegación principal"
             className="grid w-full grid-cols-4 gap-1 rounded-2xl text-xs font-semibold text-muted md:flex md:w-auto md:items-center md:gap-2 md:text-sm"
           >
             {links.map((link) => {

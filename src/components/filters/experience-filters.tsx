@@ -6,6 +6,7 @@ import ExperienceGrid from "@/components/experience/experience-grid";
 import FilterBar from "@/components/filters/filter-bar";
 import SearchBar from "@/components/filters/search-bar";
 import { useFavorites } from "@/components/providers/favorites-provider";
+import Spinner from "@/components/ui/spinner";
 import { experiences } from "@/data/experiences";
 import { useExperiences } from "@/hooks/use-experiences";
 
@@ -60,7 +61,10 @@ export default function ExperienceFilters() {
       </div>
 
       {isLoading ? (
-        <p className="text-sm font-semibold text-muted">Cargando experiencias...</p>
+        <div className="flex min-h-[45vh] flex-col items-center justify-center gap-3">
+          <Spinner />
+          <p className="text-sm font-semibold text-muted">Cargando experiencias...</p>
+        </div>
       ) : (
         <>
           <p className="text-sm font-semibold text-muted">

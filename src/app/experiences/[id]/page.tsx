@@ -18,8 +18,8 @@ const itineraryItems = [
   },
   {
     time: "05:15 AM",
-    title: "Briefing y preparacion",
-    description: "Revision rapida de seguridad, equipo y recomendaciones antes de comenzar.",
+    title: "Introducción y preparación",
+    description: "Revisión rápida de seguridad, equipo y recomendaciones antes de comenzar.",
   },
   {
     time: "06:00 AM",
@@ -151,24 +151,24 @@ export default async function ExperienceDetailPage({ params }: ExperienceDetailP
           <h1 className="font-heading text-3xl font-bold leading-tight text-foreground md:text-4xl">{experience.title}</h1>
           <p className="text-sm text-foreground/90">
             <RatingStars rating={experience.rating} className="align-middle" />
-            <span className="ml-1 text-muted">(1.2k reviews)</span>
+            <span className="ml-1 text-muted">(1.2 mil reseñas)</span>
           </p>
         </header>
 
         <div className="mt-5 grid grid-cols-3 gap-2 md:gap-3">
           <StatItem label="Duracion" value="4h" />
           <StatItem label="Grupo max" value="10 personas" />
-          <StatItem label="Reserva" value="Instantanea" />
+          <StatItem label="Reserva" value="Instantánea" />
         </div>
 
         <section className="mt-7 space-y-3">
-          <h2 className="text-xl font-semibold text-foreground">Overview</h2>
+          <h2 className="text-xl font-semibold text-foreground">Descripción general</h2>
           <p className="text-base leading-7 text-foreground/90">{experience.description}</p>
         </section>
 
         <section className="mt-8 grid gap-5 lg:grid-cols-[1.3fr_1fr] lg:items-start">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-foreground">Itinerary</h2>
+            <h2 className="text-xl font-semibold text-foreground">Itinerario</h2>
             <ol className="space-y-5 border-l border-primary/25 pl-4">
               {itineraryItems.map((item) => (
                 <li key={item.time} className="relative">
@@ -197,7 +197,7 @@ export default async function ExperienceDetailPage({ params }: ExperienceDetailP
 
         <section className="mt-8 pb-2">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-foreground">Reviews</h2>
+            <h2 className="text-xl font-semibold text-foreground">Reseñas</h2>
             <p className="text-sm font-semibold text-primary">Ver todo</p>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">

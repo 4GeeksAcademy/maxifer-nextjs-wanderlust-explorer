@@ -1,64 +1,60 @@
 "use client";
 
-import Card from "@/components/ui/card";
+import { Bell, CircleHelp, CreditCard, MessageSquareWarning, UserRound } from "lucide-react";
 import { useFavorites } from "@/components/providers/favorites-provider";
+import ProfileAdventureCard from "./components/profile-adventure-card";
+import ProfileHeader from "./components/profile-header";
+import ProfileLogoutButton from "./components/profile-logout-button";
+import type { ProfileMenuItem } from "./components/profile-menu-section";
+import ProfileMenuSection from "./components/profile-menu-section";
+import ProfileStats from "./components/profile-stats";
 
 const simulatedUser = {
-  name: "Sofia Martinez",
-  handle: "@sofia.routes",
-  bio: "Travel lover focused on food, local culture, and hidden gems in every city.",
-  country: "Argentina",
-  favoriteStyle: "Cultural & Food",
-  exploredCount: 42,
+  name: "Elena Rodriguez",
+  location: "Madrid, España",
+  tripsCount: 8,
+  reviewsCount: 15,
+  upcomingDateRange: "15 de julio - 22 de julio",
+  upcomingDestination: "Costa Amalfitana, Italia",
+  avatarInitials: "ER",
 };
+
+const accountItems: ProfileMenuItem[] = [
+  { id: "personal", label: "Información personal", icon: UserRound },
+  { id: "payments", label: "Pagos y cobros", icon: CreditCard },
+  { id: "notifications", label: "Notificaciones", icon: Bell },
+];
+
+const supportItems: ProfileMenuItem[] = [
+  { id: "help", label: "Centro de ayuda", icon: CircleHelp },
+  { id: "feedback", label: "Envíanos tus comentarios", icon: MessageSquareWarning },
+];
 
 export default function ProfilePage() {
   const { favoriteIds } = useFavorites();
 
   return (
-    <section className="space-y-8">
-      <header className="space-y-2">
-        <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Perfil</h1>
-        <p className="max-w-2xl text-sm leading-6 text-muted sm:text-base">
-          Tu resumen de viajera para seguir descubriendo experiencias inolvidables.
-        </p>
-      </header>
+    <section className="mx-auto max-w-xl space-y-5 pb-4 md:max-w-3xl md:space-y-6">
+      <ProfileHeader
+        name={simulatedUser.name}
+        location={simulatedUser.location}
+        avatarInitials={simulatedUser.avatarInitials}
+      />
 
-      <Card className="space-y-6 p-6 sm:p-8">
-        <div className="flex items-center gap-4">
-          <div
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-primary font-heading text-lg font-bold text-white shadow-card"
-            aria-hidden="true"
-          >
-            SM
-          </div>
-          <div>
-            <h2 className="font-heading text-2xl font-semibold text-foreground">{simulatedUser.name}</h2>
-            <p className="text-sm text-muted">{simulatedUser.handle}</p>
-          </div>
-        </div>
+      <ProfileStats
+        savedCount={favoriteIds.length}
+        tripCount={simulatedUser.tripsCount}
+        reviewCount={simulatedUser.reviewsCount}
+      />
 
-        <p className="max-w-3xl text-sm leading-6 text-muted sm:text-base">{simulatedUser.bio}</p>
+      <ProfileAdventureCard
+        dateRange={simulatedUser.upcomingDateRange}
+        destination={simulatedUser.upcomingDestination}
+      />
 
-        <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-surface-low p-4">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Pais</dt>
-            <dd className="mt-1 text-sm font-medium text-foreground">{simulatedUser.country}</dd>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface-low p-4">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Estilo favorito</dt>
-            <dd className="mt-1 text-sm font-medium text-foreground">{simulatedUser.favoriteStyle}</dd>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface-low p-4">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Experiencias exploradas</dt>
-            <dd className="mt-1 font-heading text-2xl font-bold text-primary">{simulatedUser.exploredCount}</dd>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface-low p-4">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-muted">Favoritos guardados</dt>
-            <dd className="mt-1 font-heading text-2xl font-bold text-primary">{favoriteIds.length}</dd>
-          </div>
-        </dl>
-      </Card>
+      <ProfileMenuSection title="Cuenta" items={accountItems} />
+      <ProfileMenuSection title="Soporte" items={supportItems} />
+      <ProfileLogoutButton />
     </section>
   );
 }

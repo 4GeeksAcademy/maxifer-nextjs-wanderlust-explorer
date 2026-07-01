@@ -15,7 +15,7 @@ function RatingStars({ rating }: { rating: number }) {
   const clampedRating = Math.max(0, Math.min(5, rating));
 
   return (
-    <p className="flex items-center gap-1 text-sm" aria-label={`Rating ${rating.toFixed(1)} de 5`}>
+    <p className="flex items-center gap-1 text-sm" aria-label={`Calificación ${rating.toFixed(1)} de 5`}>
       <span className="inline-flex items-center gap-0.5" aria-hidden="true">
         {Array.from({ length: 5 }, (_, index) => {
           const fillPercent = Math.max(0, Math.min(1, clampedRating - index)) * 100;
@@ -45,7 +45,7 @@ export default function ExperienceCard({ experience, isFavorite, onToggleFavorit
 
         <Link
           href={`/experiences/${experience.id}`}
-          className="relative block aspect-4/3 w-full overflow-hidden rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="relative block aspect-4/3 w-full overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           aria-label={`Ver detalle de ${experience.title}`}
         >
           <Image
@@ -67,7 +67,7 @@ export default function ExperienceCard({ experience, isFavorite, onToggleFavorit
           <h3 className="font-heading text-lg font-semibold leading-6">
             <Link
               href={`/experiences/${experience.id}`}
-              className="text-foreground transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="text-foreground transition hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               {experience.title}
             </Link>
