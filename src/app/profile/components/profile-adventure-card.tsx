@@ -27,14 +27,14 @@ export default function ProfileAdventureCard({ dateRange, destination }: Profile
           type="button"
           className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl border border-border bg-surface px-4 py-3 text-sm font-semibold text-foreground shadow-card transition hover:border-primary/35 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <CirclePlus className="h-5 w-5 text-primary" aria-hidden="true" />
+          <CirclePlus className="h-5 w-5 text-primary" aria-hidden={true} />
           Nuevo plan
         </button>
         <button
           type="button"
           className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl border border-border bg-surface px-4 py-3 text-sm font-semibold text-foreground shadow-card transition hover:border-primary/35 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <CalendarDays className="h-5 w-5 text-muted" aria-hidden="true" />
+          <CalendarDays className="h-5 w-5 text-muted" aria-hidden={true} />
           Ver calendario
         </button>
       </div>

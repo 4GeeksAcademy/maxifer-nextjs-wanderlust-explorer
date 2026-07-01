@@ -46,7 +46,7 @@ function HeroCta() {
     >
       <span>Explorar experiencias</span>
       <span className="ml-4 flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-white sm:size-16">
-        <Search aria-hidden="true" className="size-7" strokeWidth={2.5} />
+        <Search aria-hidden={true} className="size-7" strokeWidth={2.5} />
       </span>
     </Link>
   );

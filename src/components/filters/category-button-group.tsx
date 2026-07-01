@@ -46,7 +46,7 @@ export default function CategoryButtonGroup({ value, onChange }: CategoryButtonG
                     : "border-transparent bg-surface text-primary group-hover:border-primary/40 group-hover:bg-primary/5",
                 )}
               >
-                <Icon className="h-8 w-8" aria-hidden="true" />
+                <Icon className="h-8 w-8" aria-hidden={true} />
               </span>
               <span
                 className={cn(

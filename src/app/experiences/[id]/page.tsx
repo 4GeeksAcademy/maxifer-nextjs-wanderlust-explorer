@@ -42,11 +42,11 @@ const reviews = [
 ];
 
 function BackIcon() {
-  return <ArrowLeft aria-hidden="true" className="h-5 w-5" />;
+  return <ArrowLeft aria-hidden={true} className="h-5 w-5" />;
 }
 
 function ShareIcon() {
-  return <Share2 aria-hidden="true" className="h-5 w-5" />;
+  return <Share2 aria-hidden={true} className="h-5 w-5" />;
 }
 
 function StatItem({ label, value }: { label: string; value: string }) {
@@ -63,7 +63,7 @@ function RatingStars({ rating, className }: { rating: number; className?: string
 
   return (
     <span className={`inline-flex items-center gap-1 ${className ?? ""}`}>
-      <span className="inline-flex items-center gap-0.5" aria-hidden="true">
+      <span className="inline-flex items-center gap-0.5" aria-hidden={true}>
         {Array.from({ length: 5 }, (_, index) => {
           const fillPercent = Math.max(0, Math.min(1, clampedRating - index)) * 100;
 

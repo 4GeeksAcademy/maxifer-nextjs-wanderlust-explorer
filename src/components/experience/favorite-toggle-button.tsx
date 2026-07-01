@@ -25,7 +25,7 @@ export default function FavoriteToggleButton({
         aria-label={isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
         className={`${baseClasses} h-11 w-11 border-0 bg-white/95 backdrop-blur-sm transition hover:scale-[1.03] ${isFavorite ? "text-primary" : "text-foreground hover:text-primary"} ${className ?? ""}`}
       >
-        <Heart aria-hidden="true" className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
+        <Heart aria-hidden={true} className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
       </button>
     );
   }
@@ -37,7 +37,7 @@ export default function FavoriteToggleButton({
       aria-pressed={isFavorite}
       className={`${baseClasses} h-12 gap-2 px-4 ${isFavorite ? "text-primary" : "text-foreground hover:text-primary"} ${className ?? ""}`}
     >
-      <Heart aria-hidden="true" className="h-4 w-4" fill={isFavorite ? "currentColor" : "none"} />
+      <Heart aria-hidden={true} className="h-4 w-4" fill={isFavorite ? "currentColor" : "none"} />
       {isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
     </button>
   );

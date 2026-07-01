@@ -31,10 +31,10 @@ export default function ProfileMenuSection({ title, items }: ProfileMenuSectionP
                   className="flex w-full items-center justify-between px-4 py-4 text-left transition hover:bg-surface-low focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   <span className="flex items-center gap-3 text-lg font-medium text-foreground">
-                    <Icon className="h-5 w-5 text-muted" aria-hidden="true" />
+                    <Icon className="h-5 w-5 text-muted" aria-hidden={true} />
                     {item.label}
                   </span>
-                  <ChevronRight className="h-5 w-5 text-muted" aria-hidden="true" />
+                  <ChevronRight className="h-5 w-5 text-muted" aria-hidden={true} />
                 </button>
               </li>
             );

@@ -16,7 +16,7 @@ function RatingStars({ rating }: { rating: number }) {
 
   return (
     <p className="flex items-center gap-1 text-sm" aria-label={`Calificación ${rating.toFixed(1)} de 5`}>
-      <span className="inline-flex items-center gap-0.5" aria-hidden="true">
+      <span className="inline-flex items-center gap-0.5" aria-hidden={true}>
         {Array.from({ length: 5 }, (_, index) => {
           const fillPercent = Math.max(0, Math.min(1, clampedRating - index)) * 100;
 
