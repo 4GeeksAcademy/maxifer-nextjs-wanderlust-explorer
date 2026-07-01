@@ -114,26 +114,16 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+0.5rem)] transition-transform duration-300 md:hidden",
+          "fixed inset-x-0 top-0 z-50 pt-[calc(env(safe-area-inset-top)+0.5rem)] transition-transform duration-300 md:hidden",
           isMobileHeaderVisible ? "translate-y-0" : "-translate-y-full",
         )}
       >
-        <div className="mx-auto flex h-13 max-w-7xl items-center justify-between rounded-2xl border border-border bg-surface/95 px-4 shadow-card backdrop-blur">
-          <Link href="/" className="flex items-center gap-2 text-foreground">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 bg-primary-soft font-heading text-sm font-bold text-primary">
+        <div className="flex h-13 w-full items-center border border-border bg-surface/95 px-4 shadow-card backdrop-blur">
+          <Link href="/" className="flex items-center gap-3 text-foreground">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-heading text-base font-bold text-white">
               W
             </span>
-            <span className="font-heading text-[1rem] font-semibold tracking-tight">Wanderlust Explorer</span>
-          </Link>
-          <Link
-            href="/profile"
-            aria-label="Ir al perfil"
-            className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-low text-muted transition hover:border-primary/40 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-              isActiveLink("/profile") && "border-primary/50 bg-primary-soft text-primary",
-            )}
-          >
-            <NavIcon name="user" />
+            <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
           </Link>
         </div>
       </header>
@@ -146,7 +136,7 @@ export default function Navbar() {
       >
         <div className="mx-auto flex w-full max-w-7xl items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
           <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-heading text-base font-bold text-white">
               W
             </span>
             <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>

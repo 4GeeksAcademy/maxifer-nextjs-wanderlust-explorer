@@ -10,13 +10,13 @@ import ProfileMenuSection from "./components/profile-menu-section";
 import ProfileStats from "./components/profile-stats";
 
 const simulatedUser = {
-  name: "Elena Rodriguez",
-  location: "Madrid, España",
+  name: "Maximiliano Fernández",
+  location: "Montevideo, Uruguay",
   tripsCount: 8,
   reviewsCount: 15,
   upcomingDateRange: "15 de julio - 22 de julio",
-  upcomingDestination: "Costa Amalfitana, Italia",
-  avatarInitials: "ER",
+  upcomingDestination: "Pirámides de Guiza, Egipto",
+  avatarInitials: "MF",
 };
 
 const accountItems: ProfileMenuItem[] = [
