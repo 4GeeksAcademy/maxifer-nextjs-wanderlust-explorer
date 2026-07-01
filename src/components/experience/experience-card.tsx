@@ -37,7 +37,7 @@ function RatingStars({ rating }: { rating: number }) {
 
 export default function ExperienceCard({ experience, isFavorite, onToggleFavorite }: ExperienceCardProps) {
   return (
-    <Card className="group relative h-full overflow-hidden bg-surface p-0 transition duration-200 hover:-translate-y-0.5 hover:shadow-card-hover">
+    <Card className="group relative h-full overflow-hidden bg-surface p-0! transition duration-200 hover:-translate-y-0.5 hover:shadow-card-hover">
       <div className="relative">
         <div className="absolute right-3 top-3 z-20">
           <FavoriteToggleButton isFavorite={isFavorite} onToggle={() => onToggleFavorite(experience.id)} variant="icon" />
@@ -45,7 +45,7 @@ export default function ExperienceCard({ experience, isFavorite, onToggleFavorit
 
         <Link
           href={`/experiences/${experience.id}`}
-          className="relative block aspect-4/3 w-full overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="relative block aspect-4/3 w-full overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           aria-label={`Ver detalle de ${experience.title}`}
         >
           <Image

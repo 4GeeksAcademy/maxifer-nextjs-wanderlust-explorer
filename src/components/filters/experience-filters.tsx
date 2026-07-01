@@ -61,7 +61,7 @@ export default function ExperienceFilters() {
       </div>
 
       {isLoading ? (
-        <div className="flex min-h-[45vh] flex-col items-center justify-center gap-3">
+        <div className="flex min-h-[30vh] flex-col items-center justify-start gap-3 pt-4 sm:min-h-[45vh] sm:justify-center sm:pt-0">
           <Spinner />
           <p className="text-sm font-semibold text-muted">Cargando experiencias...</p>
         </div>
