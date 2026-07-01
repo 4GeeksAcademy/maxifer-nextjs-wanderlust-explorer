@@ -11,10 +11,9 @@ export default function FavoritesPage() {
 
   return (
     <section className="space-y-8">
-      <header className="rounded-2xl border border-border bg-surface px-5 py-6 shadow-card sm:px-8 sm:py-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Coleccion</p>
-        <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Favoritos</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">
+      <header className="space-y-2">
+        <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Favoritos</h1>
+        <p className="max-w-2xl text-sm leading-6 text-muted sm:text-base">
           Guarda tus experiencias preferidas para volver a ellas cuando quieras.
         </p>
       </header>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -71,6 +72,43 @@ function NavIcon({ name }: { name: string }) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isMobileHeaderVisible, setIsMobileHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const isExperiencesRoute = pathname === "/experiences" || pathname.startsWith("/experiences/");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (isExperiencesRoute) {
+        setIsMobileHeaderVisible(currentY <= 8);
+        lastScrollY.current = currentY;
+        return;
+      }
+
+      if (currentY <= 8) {
+        setIsMobileHeaderVisible(true);
+        lastScrollY.current = currentY;
+        return;
+      }
+
+      if (currentY > lastScrollY.current + 4) {
+        setIsMobileHeaderVisible(false);
+      }
+
+      if (currentY < lastScrollY.current - 4) {
+        setIsMobileHeaderVisible(true);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isExperiencesRoute]);
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -81,39 +119,67 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
-      <div className="mx-auto flex w-full max-w-[1280px] items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
-        <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
-            W
-          </span>
-          <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
-        </Link>
-        <nav
-          aria-label="Navegacion principal"
-          className="grid w-full grid-cols-4 gap-1 rounded-2xl text-xs font-semibold text-muted md:flex md:w-auto md:items-center md:gap-2 md:text-sm"
-        >
-          {links.map((link) => {
-            const isActive = isActiveLink(link.href);
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 px-4 pt-[calc(env(safe-area-inset-top)+0.5rem)] transition-transform duration-300 md:hidden",
+          isMobileHeaderVisible ? "translate-y-0" : "-translate-y-full",
+        )}
+      >
+        <div className="mx-auto flex h-13 max-w-7xl items-center justify-between rounded-2xl border border-border bg-surface/95 px-4 shadow-card backdrop-blur">
+          <Link href="/" className="flex items-center gap-2 text-foreground">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/20 bg-primary-soft font-heading text-sm font-bold text-primary">
+              W
+            </span>
+            <span className="font-heading text-[1rem] font-semibold tracking-tight">Wanderlust Explorer</span>
+          </Link>
+          <Link
+            href="/profile"
+            aria-label="Ir al perfil"
+            className={cn(
+              "flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-low text-muted transition hover:border-primary/40 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+              isActiveLink("/profile") && "border-primary/50 bg-primary-soft text-primary",
+            )}
+          >
+            <NavIcon name="user" />
+          </Link>
+        </div>
+      </header>
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={cn(
-                  "flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-center transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
-                  "hover:bg-surface-low hover:text-foreground",
-                  isActive && "bg-primary text-white shadow-card hover:bg-primary-hover hover:text-white",
-                )}
-              >
-                <NavIcon name={link.icon} />
-                <span className="truncate">{link.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
-    </header>
+      <header className="fixed inset-x-0 bottom-0 z-40 bg-transparent px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 md:sticky md:top-0 md:bottom-auto md:border-b md:border-border md:bg-background/90 md:px-0 md:py-0 md:backdrop-blur">
+        <div className="mx-auto flex w-full max-w-7xl items-center rounded-2xl border border-border bg-surface/95 p-1 shadow-panel backdrop-blur md:justify-between md:rounded-none md:border-0 md:bg-transparent md:p-0 md:px-6 md:py-4 md:shadow-none md:backdrop-blur-none lg:px-8">
+          <Link href="/" className="hidden items-center gap-3 text-foreground md:flex">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary font-heading text-base font-bold text-white">
+              W
+            </span>
+            <span className="font-heading text-lg font-bold tracking-tight">Wanderlust Explorer</span>
+          </Link>
+          <nav
+            aria-label="Navegacion principal"
+            className="grid w-full grid-cols-4 gap-1 rounded-2xl text-xs font-semibold text-muted md:flex md:w-auto md:items-center md:gap-2 md:text-sm"
+          >
+            {links.map((link) => {
+              const isActive = isActiveLink(link.href);
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 text-center transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:min-h-0 md:flex-row md:rounded-full md:px-4 md:py-2",
+                    "hover:bg-surface-low hover:text-foreground",
+                    isActive && "bg-primary text-white shadow-card hover:bg-primary-hover hover:text-white",
+                  )}
+                >
+                  <NavIcon name={link.icon} />
+                  <span className="truncate">{link.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }

@@ -34,7 +34,7 @@ export default function RootLayout({
         <FavoritesProvider>
           <div className="flex min-h-screen flex-col pb-24 md:pb-0">
             <Navbar />
-            <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+            <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-8 pt-20 sm:px-6 md:pt-8 lg:px-8 lg:py-12">
               {children}
             </main>
           </div>
