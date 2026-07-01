@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ExperienceGrid from "@/components/experience/experience-grid";
 import FilterBar from "@/components/filters/filter-bar";
+import SearchBar from "@/components/filters/search-bar";
 import { useFavorites } from "@/components/providers/favorites-provider";
 import { experiences } from "@/data/experiences";
 import { useExperiences } from "@/hooks/use-experiences";
@@ -36,7 +37,13 @@ export default function ExperienceFilters() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-border bg-surface-low p-4 sm:p-5">
+      <div className="sticky top-2 z-30 px-1 sm:px-0 md:top-24">
+        <div className="mx-auto w-full max-w-3xl rounded-full bg-background/95 p-1 backdrop-blur supports-backdrop-filter:bg-background/80">
+          <SearchBar value={filters.search} onChange={(value) => updateParam("search", value)} />
+        </div>
+      </div>
+
+      <div className="px-1 sm:px-0">
         <FilterBar filters={filters} onFilterChange={updateParam} />
       </div>
 
